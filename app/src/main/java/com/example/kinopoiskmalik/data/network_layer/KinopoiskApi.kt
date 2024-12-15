@@ -1,7 +1,7 @@
-package com.example.kinopoisk.data.network_layer
+package com.example.kinopoiskmalik.data.network_layer
 
-import com.example.kinopoisk.data.network_layer.models.FilmDetailDto
-import com.example.kinopoisk.data.network_layer.models.FilmsWrapperDto
+import com.example.kinopoiskmalik.data.network_layer.models.FilmDetailDto
+import com.example.kinopoiskmalik.data.network_layer.models.FilmsWrapperDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

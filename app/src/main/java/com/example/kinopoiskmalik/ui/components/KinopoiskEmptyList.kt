@@ -17,8 +17,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.kinopoiskmalik.R
 
+
 @Composable
-fun EmptyList(modifier: Modifier = Modifier){
+fun KinopoiskEmptyList(modifier: Modifier = Modifier){
     Surface(modifier = Modifier) {
         Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Box(

@@ -1,4 +1,4 @@
-package com.example.kinopoisk.domain.models
+package com.example.kinopoiskmalik.domain.models
 
 data class FilmDetail(
     val id: String,

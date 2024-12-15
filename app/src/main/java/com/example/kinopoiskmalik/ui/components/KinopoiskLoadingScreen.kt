@@ -1,4 +1,4 @@
-package com.example.kinopoisk.ui.components
+package com.example.kinopoiskmalik.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

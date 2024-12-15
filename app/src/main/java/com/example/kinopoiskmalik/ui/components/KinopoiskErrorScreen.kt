@@ -1,4 +1,4 @@
-package com.example.kinopoisk.ui.components
+package com.example.kinopoiskmalik.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,7 +22,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.kinopoisk.R
+import com.example.kinopoiskmalik.R
 
 @Preview
 @Composable

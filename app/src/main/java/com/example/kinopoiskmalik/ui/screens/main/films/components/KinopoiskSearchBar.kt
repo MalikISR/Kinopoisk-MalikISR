@@ -1,4 +1,4 @@
-package com.example.kinopoisk.ui.screens.main.films.components
+package com.example.kinopoiskmalik.ui.screens.main.films.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
@@ -19,7 +19,8 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import com.example.kinopoisk.R
+import com.example.kinopoiskmalik.R
+
 
 @Composable
 fun KinopoiskSearchBar(

@@ -1,7 +1,7 @@
-package com.example.kinopoisk.domain.repository
+package com.example.kinopoiskmalik.domain.repository
 
-import com.example.kinopoisk.domain.models.Film
-import com.example.kinopoisk.domain.models.FilmDetail
+import com.example.kinopoiskmalik.domain.models.Film
+import com.example.kinopoiskmalik.domain.models.FilmDetail
 import kotlinx.coroutines.flow.Flow
 
 interface FilmRepository {
@@ -11,18 +11,12 @@ interface FilmRepository {
         keyWord: String,
     ): Flow<List<Film>>
 
-    fun observeFavoriteFilms(
-        keyWord: String
-    ): Flow<List<Film>>
 
     fun getFilmDetail(
         id: String,
         force: Boolean,
     ): Flow<FilmDetail>
 
-    fun setFavorite(
-        film: Film,
-    ): Flow<Boolean>
 }
 
 enum class FilmQueryType(val type: String) {

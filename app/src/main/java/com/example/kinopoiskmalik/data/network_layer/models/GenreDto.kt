@@ -1,7 +1,7 @@
-package com.example.kinopoisk.data.network_layer.models
+package com.example.kinopoiskmalik.data.network_layer.models
 
 import androidx.annotation.Keep
-import com.example.kinopoisk.domain.models.Genre
+import com.example.kinopoiskmalik.domain.models.Genre
 import kotlinx.serialization.Serializable
 
 @Keep

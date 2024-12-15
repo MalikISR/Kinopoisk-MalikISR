@@ -1,4 +1,4 @@
-package com.example.kinopoisk.utils
+package com.example.kinopoiskmalik.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

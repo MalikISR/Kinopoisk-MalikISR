@@ -1,4 +1,4 @@
-package com.example.kinopoisk.ui.screens.main.films
+package com.example.kinopoiskmalik.ui.screens.main.films
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -38,10 +38,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
-import com.example.kinopoisk.R
-import com.example.kinopoisk.ui.components.KinopoiskErrorScreen
-import com.example.kinopoisk.ui.components.KinopoiskLoadingScreen
-import com.example.kinopoisk.utils.shimmerBrush
+import com.example.kinopoiskmalik.ui.components.KinopoiskErrorScreen
+import com.example.kinopoiskmalik.ui.components.KinopoiskLoadingScreen
+import com.example.kinopoiskmalik.utils.shimmerBrush
+import com.example.kinopoiskmalik.R
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

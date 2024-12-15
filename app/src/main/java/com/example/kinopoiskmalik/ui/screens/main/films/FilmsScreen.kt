@@ -1,4 +1,4 @@
-package com.example.kinopoisk.ui.screens.main.films
+package com.example.kinopoiskmalik.ui.screens.main.films
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -31,17 +31,16 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.kinopoisk.R
-import com.example.kinopoisk.domain.models.Country
-import com.example.kinopoisk.domain.models.Film
-import com.example.kinopoisk.domain.models.FilmDetail
-import com.example.kinopoisk.domain.models.Genre
-import com.example.kinopoisk.ui.components.KinopoiskEmptyList
-import com.example.kinopoisk.ui.components.KinopoiskErrorScreen
-import com.example.kinopoisk.ui.components.KinopoiskLoadingScreen
-import com.example.kinopoisk.ui.screens.main.films.components.FilmsBottomNavigation
-import com.example.kinopoisk.ui.screens.main.films.components.FilmsList
-import com.example.kinopoisk.ui.screens.main.films.components.KinopoiskSearchBar
+import com.example.kinopoiskmalik.ui.components.KinopoiskEmptyList
+import com.example.kinopoiskmalik.ui.components.KinopoiskErrorScreen
+import com.example.kinopoiskmalik.ui.components.KinopoiskLoadingScreen
+import com.example.kinopoiskmalik.ui.screens.main.films.components.FilmsList
+import com.example.kinopoiskmalik.ui.screens.main.films.components.KinopoiskSearchBar
+import com.example.kinopoiskmalik.R
+import com.example.kinopoiskmalik.domain.models.Country
+import com.example.kinopoiskmalik.domain.models.Film
+import com.example.kinopoiskmalik.domain.models.FilmDetail
+import com.example.kinopoiskmalik.domain.models.Genre
 
 @Preview(
     device = "spec:width=411dp,height=891dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape"
@@ -51,8 +50,7 @@ private fun PreviewLandscapeFilmsScreen() {
     MaterialTheme {
         FilmsScreen(
             uiState = FilmsUiState(
-                films = Film.generateMock(5, false),
-                favoriteFilms = Film.generateMock(5, true),
+                films = Film.generateMock(5),
                 selectedFilm = FilmDetail.mock
             ),
             onEvent = {},
@@ -68,8 +66,7 @@ private fun PreviewPortraitFilmsScreen() {
     MaterialTheme {
         FilmsScreen(
             uiState = FilmsUiState(
-                films = Film.generateMock(5, false),
-                favoriteFilms = Film.generateMock(5, true),
+                films = Film.generateMock(5),
             ),
             onEvent = {},
         )
@@ -154,35 +151,23 @@ fun FilmsScreen(
                         )
                     }
                 },
-                bottomBar = {
-                    FilmsBottomNavigation(
-                        selectedFilmsType = selectedFilmsType,
-                        onClickType = { type ->
-                            selectedFilmsType = type
-                        }
-                    )
-                }
+
             ) { innerPadding ->
                 val films = when (selectedFilmsType) {
                     FilmsType.Popular -> uiState.films
-                    FilmsType.Favorite -> uiState.favoriteFilms
                 }
-                if (!uiState.error.isNullOrBlank() && selectedFilmsType != FilmsType.Favorite) {
+                if (!uiState.error.isNullOrBlank()) {
                     KinopoiskErrorScreen(
                         errorText = uiState.error.toString(),
                         onClickRetry = {
                             onEvent(FilmsEvent.RefreshData)
                         }
                     )
-                } else if (
-                    (uiState.filmsLoading && selectedFilmsType == FilmsType.Popular)
-                    || (uiState.favoriteFilmsLoading && selectedFilmsType == FilmsType.Favorite)
-                ) {
-                    KinopoiskLoadingScreen(
-                        modifier = Modifier
-                            .padding(innerPadding)
+                } else if (uiState.filmsLoading && selectedFilmsType == FilmsType.Popular)
+                {KinopoiskLoadingScreen(
+                    modifier = Modifier.padding(innerPadding)
                     )
-                } else if (!uiState.filmsLoading && !uiState.favoriteFilmsLoading && films.isEmpty()) {
+                } else if (!uiState.filmsLoading && films.isEmpty()) {
                     KinopoiskEmptyList(
                         modifier = Modifier
                             .padding(innerPadding)
@@ -223,5 +208,4 @@ fun FilmsScreen(
 
 enum class FilmsType(@StringRes val text: Int) {
     Popular(R.string.popular),
-    Favorite(R.string.favorites),
 }

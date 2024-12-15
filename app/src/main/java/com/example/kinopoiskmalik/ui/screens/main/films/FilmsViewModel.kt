@@ -1,14 +1,14 @@
-package com.example.kinopoisk.ui.screens.main.films
+package com.example.kinopoiskmalik.ui.screens.main.films
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kinopoisk.data.collectAsResult
-import com.example.kinopoisk.domain.models.Film
-import com.example.kinopoisk.domain.models.FilmDetail
-import com.example.kinopoisk.domain.repository.FilmQueryType
-import com.example.kinopoisk.domain.repository.FilmRepository
-import com.example.kinopoisk.utils.EffectHandler
-import com.example.kinopoisk.utils.EventHandler
+import com.example.kinopoiskmalik.data.collectAsResult
+import com.example.kinopoiskmalik.domain.models.Film
+import com.example.kinopoiskmalik.domain.models.FilmDetail
+import com.example.kinopoiskmalik.domain.repository.FilmQueryType
+import com.example.kinopoiskmalik.domain.repository.FilmRepository
+import com.example.kinopoiskmalik.utils.EffectHandler
+import com.example.kinopoiskmalik.utils.EventHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -31,21 +31,14 @@ class FilmsViewModel @Inject constructor(
 
     override val effectChannel: Channel<FilmsEffect> = Channel()
 
-
-    private var favoriteFilmsJob: Job? = null
     private var searchJob: Job? = null
 
     init {
         getFilms()
-        observeFavoriteFilms()
     }
 
     override fun obtainEvent(event: FilmsEvent) {
         when (event) {
-            is FilmsEvent.ChangeFavorite -> {
-                changeFavorite(event.film)
-            }
-
             FilmsEvent.RefreshData -> {
                 getFilms()
             }
@@ -77,7 +70,6 @@ class FilmsViewModel @Inject constructor(
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
             delay(SEARCH_TIME_DELAY)
-            observeFavoriteFilms(value)
             getFilms(value)
         }
     }
@@ -128,59 +120,14 @@ class FilmsViewModel @Inject constructor(
         }
     }
 
-    private fun changeFavorite(film: Film) {
-        viewModelScope.launch {
-            filmRepository.setFavorite(film).collectAsResult(
-                onSuccess = { newValue ->
-                    _filmsUiState.update { currentState ->
-                        currentState.copy(
-                            films = currentState.films.toMutableList()
-                                .map { if (it.id == film.id) it.copy(favorite = newValue) else it },
-                        )
-                    }
-                }
-            )
-        }
-    }
-
-    private fun observeFavoriteFilms(keyWord: String = "") {
-        favoriteFilmsJob?.cancel()
-        favoriteFilmsJob = viewModelScope.launch {
-            filmRepository.observeFavoriteFilms(keyWord).collectAsResult(
-                onSuccess = { films ->
-                    _filmsUiState.update { currentState ->
-                        currentState.copy(
-                            favoriteFilms = films,
-                            favoriteFilmsLoading = false,
-                        )
-                    }
-                },
-                onLoading = {
-                    _filmsUiState.update { currentState ->
-                        currentState.copy(
-                            favoriteFilmsLoading = true,
-                        )
-                    }
-                },
-                onError = { ex, message ->
-                    _filmsUiState.update { currentState ->
-                        currentState.copy(
-                            favoriteFilmsLoading = false,
-                        )
-                    }
-                }
-            )
-        }
-    }
-
     private fun getFilms(
         keyWord: String = "",
     ) {
         viewModelScope.launch {
             filmRepository.getFilms(
                 queryType = FilmQueryType.TOP_100,
-                keyWord = keyWord,
-            ).collectAsResult(
+                keyWord = keyWord,)
+                .collectAsResult(
                 onSuccess = { films ->
                     _filmsUiState.update { currentState ->
                         currentState.copy(
@@ -214,12 +161,10 @@ class FilmsViewModel @Inject constructor(
 
 data class FilmsUiState(
     val filmsLoading: Boolean = false,
-    val favoriteFilmsLoading: Boolean = false,
     val filmDetailLoading: Boolean = false,
     val error: String? = null,
     val errorFilmDetail: String? = null,
     val films: List<Film> = emptyList(),
-    val favoriteFilms: List<Film> = emptyList(),
     val searchBarText: String = "",
     val selectedFilm: FilmDetail? = null,
 )
@@ -232,10 +177,6 @@ sealed interface FilmsEffect {
 
 sealed interface FilmsEvent {
     data object RefreshData : FilmsEvent
-
-    data class ChangeFavorite(
-        val film: Film,
-    ) : FilmsEvent
 
     data class ChangeSearchBarText(
         val value: String,

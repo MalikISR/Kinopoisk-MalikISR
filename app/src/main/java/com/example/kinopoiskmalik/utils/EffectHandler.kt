@@ -1,4 +1,4 @@
-package com.example.kinopoisk.utils
+package com.example.kinopoiskmalik.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel

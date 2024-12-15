@@ -1,21 +1,18 @@
-package com.example.kinopoisk.di
+package com.example.kinopoiskmalik.di
 
-import android.content.Context
-import androidx.room.Room
-import com.example.kinopoisk.BuildConfig
-import com.example.kinopoisk.data.network_layer.KinopoiskApi
-import com.example.kinopoisk.data.store_layer.FilmDatabase
+import com.example.kinopoiskmalik.BuildConfig
+import com.example.kinopoiskmalik.data.network_layer.KinopoiskApi
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -39,26 +36,16 @@ object DataModule {
             .create()
     }
 
-    @Singleton
-    @Provides
-    fun provideYourDatabase(
-        @ApplicationContext app: Context
-    ) = Room.databaseBuilder(
-        app,
-        FilmDatabase::class.java,
-        "kinopoisk_db"
-    ).build()
-
-    @Singleton
-    @Provides
-    fun provideFilmDao(db: FilmDatabase) = db.getFilmDao()
-
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
+//        val logging = HttpLoggingInterceptor().apply {
+//            level = HttpLoggingInterceptor.Level.BODY // Логирует тело запроса и ответа
+//        }
         return OkHttpClient.Builder()
             .callTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(ApiKeyInterceptor())
+//            .addInterceptor(logging)
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)

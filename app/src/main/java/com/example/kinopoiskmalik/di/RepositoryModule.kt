@@ -1,7 +1,7 @@
-package com.example.kinopoisk.di
+package com.example.kinopoiskmalik.di
 
-import com.example.kinopoisk.data.repository.FilmRepositoryImpl
-import com.example.kinopoisk.domain.repository.FilmRepository
+import com.example.kinopoiskmalik.data.repository.FilmRepositoryImpl
+import com.example.kinopoiskmalik.domain.repository.FilmRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

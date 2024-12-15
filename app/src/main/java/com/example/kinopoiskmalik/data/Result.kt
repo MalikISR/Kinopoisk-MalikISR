@@ -1,6 +1,5 @@
-package com.example.kinopoisk.data
+package com.example.kinopoiskmalik.data
 
-import android.database.sqlite.SQLiteException
 import android.os.NetworkOnMainThreadException
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
@@ -64,7 +63,6 @@ fun handleException(exception: Throwable?): String {
         is NetworkOnMainThreadException -> "Сетевая операция на главном потоке"
         is SecurityException -> "Проблема с безопасностью"
         is IllegalArgumentException -> "Некорректные аргументы"
-        is SQLiteException -> "Ошибка базы данных"
         is OutOfMemoryError -> "Недостаточно памяти"
         is ParseException -> "Ошибка при анализе данных"
         else -> "Неизвестная ошибка: ${exception?.localizedMessage}"

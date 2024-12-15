@@ -1,4 +1,4 @@
-package com.example.kinopoisk.ui.screens.main.films
+package com.example.kinopoiskmalik.ui.screens.main.films
 
 import android.content.res.Configuration
 import android.widget.Toast
@@ -10,9 +10,10 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.kinopoisk.domain.models.Country
-import com.example.kinopoisk.domain.models.Genre
-import com.example.kinopoisk.utils.ObserveEffect
+import com.example.kinopoiskmalik.domain.models.Country
+import com.example.kinopoiskmalik.domain.models.Genre
+import com.example.kinopoiskmalik.utils.ObserveEffect
+
 
 @Composable
 fun FilmsRoute(

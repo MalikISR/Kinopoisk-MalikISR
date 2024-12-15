@@ -1,4 +1,4 @@
-package com.example.kinopoisk.di
+package com.example.kinopoiskmalik.di
 
 import dagger.Module
 import dagger.Provides

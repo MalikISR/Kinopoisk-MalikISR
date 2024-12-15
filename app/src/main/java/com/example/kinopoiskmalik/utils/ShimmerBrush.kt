@@ -1,4 +1,4 @@
-package com.example.kinopoisk.utils
+package com.example.kinopoiskmalik.utils
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
